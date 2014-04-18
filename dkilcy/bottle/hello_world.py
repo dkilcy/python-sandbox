@@ -28,7 +28,7 @@ def show_fruit():
     fruit = bottle.request.get_cookie("fruit")
     return bottle.template("fruit_selection", { "fruit":fruit })
 
-@bottle.route('testpage')
+@bottle.route('/testpage')
 def test_page():
     return "Test Page"
 
