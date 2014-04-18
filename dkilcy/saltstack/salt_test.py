@@ -73,6 +73,9 @@ if __name__ == '__main__':
     
     #salt-ssh '*' cmd.run "yum install salt-minion"
     
+    #chkconfig salt-minion on
+    #service salt-minion start
+    
     #http://intothesaltmine.org/pages/salt-minion-install-guide.html
     #"wget -O - http://bootstrap.saltstack.org | sh"
     #"curl -L http://bootstrap.saltstack.org | sh"
