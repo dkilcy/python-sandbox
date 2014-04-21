@@ -5,16 +5,12 @@ role = sys.argv[1]
 def comp_split(role):
     parts = role.split('.')
     if len(parts) == 1 :
-        service_name = parts[0]
-        deployment_name = None
-        role_name = None
+        return len(parts), parts[0], None, None
     elif len(parts) == 2:
-        service_name, deployment_name = parts
-        role_name = None
+        return len(parts), parts, None
     elif len(parts) == 3:
-        service_name, deployment_name, role_name = parts
-
-    return len(parts), service_name, deployment_name, role_name
+        return len(parts), parts
+    return 0, None, None, None
 
 i, service_name, deployment_name, role_name = comp_split(role) 
 
@@ -29,6 +25,8 @@ elif i == 2:
 elif i == 3:
     print 'role'
 
+sys.exit()
+
 ##############################################################################
 
 for slot in 'production','staging':
@@ -36,10 +34,10 @@ for slot in 'production','staging':
 
 ##############################################################################
 
-#args = {u'flavorRef': u'1', u'network-nova': u'34882d4f-0363-49ed-9ef5-317481a2db4c', u'region': u'RegionOne', u'imageRef': u'14ecd3ad-4430-4899-8d8d-3d3f6ed440ca', u'name': u'dkilcy-test5'}
-#args = {u'flavorRef': u'1', u'network-neutron': u'00000-00000', u'region': u'RegionOne', u'imageRef': u'14ecd3ad-4430-4899-8d8d-3d3f6ed440ca', u'name': u'dkilcy-test5'}
-#args = {u'flavorRef': u'1', u'network-nova': u'34882d4f-0363-49ed-9ef5-317481a2db4c', u'network-neutron': u'00000-00000', u'region': u'RegionOne', u'imageRef': u'14ecd3ad-4430-4899-8d8d-3d3f6ed440ca', u'name': u'dkilcy-test5'}
-args = {u'flavorRef': u'1', u'region': u'RegionOne', u'imageRef': u'14ecd3ad-4430-4899-8d8d-3d3f6ed440ca', u'name': u'dkilcy-test5'}
+args = {u'flavorRef': u'1', 
+        u'region': u'RegionOne', 
+        u'imageRef': u'14ecd3ad-4430-4899-8d8d-3d3f6ed440ca', 
+        u'name': u'dkilcy-test5'}
 
 network_nova = args.pop('network-nova', None)
 network_neutron = args.pop('network-neutron', None)

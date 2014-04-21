@@ -63,7 +63,7 @@ if __name__ == '__main__':
     cfg={
         ##"client":"salt.client.SSHClient()",
         "minion_id":"*",
-        "module":"cmd.run", "commands":[ "yum install salt-minion" ], 
+        "module":"cmd.run", "commands":[ "yum install salt-minion" ],          
         #"module":"test.ping","commands":[],
         #"module":"test.fib","commands":[10],
     }  

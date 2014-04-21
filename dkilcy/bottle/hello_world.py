@@ -9,9 +9,10 @@ import bottle
 
 @bottle.route('/')
 def home_page():
-    #return "<html><title>Home Page</title><body><h3>Hello World</h3></body></html>"
+    #return "<html><title></title><body><h3>Hello World</h3></body></html>"
     mythings = ["apple","orange","banana","peach"]
-    return bottle.template("hello_world", {"username":"dkilcy", "things":mythings } )
+    return bottle.template("hello_world", {"username":"dkilcy", 
+                                           "things":mythings } )
 
 @bottle.post('/favorite_fruit')
 def favorite_fruit():
