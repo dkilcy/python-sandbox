@@ -24,10 +24,8 @@ def do_work(nodes):
             #print id, parent_id                            
             d[parent_id].append(id)            
             print 'd:', d     
-        else:
-            results.append(node)
-        
-    return results
+       
+    return d
 
 if __name__=='__main__':
     import pprint

@@ -28,10 +28,10 @@ def find_children_from_list(nodes):
         
         # copy over all the key values
         d = {}
-        #for k, v in node.iteritems():
-        #    d[k]=v
+        for k, v in node.iteritems():
+            d[k]=v
         d['id'] = id
-        #del d['parent_id']
+        del d['parent_id']
         
         x[parent_id].append(d)
 
@@ -41,13 +41,13 @@ if __name__=='__main__':
     import pprint
     
     nodes = [
-       {'id':10, 'parent_id':None,  'a':'a10', 'b':10 },
-       {'id':11, 'parent_id':10,    'a':'a11', 'b':11 },
-       {'id':12, 'parent_id':10,    'a':'a12', 'b':12 },        
-       {'id':13, 'parent_id':11,    'a':'a13', 'b':13 },
-       {'id':14, 'parent_id':12,    'a':'a14', 'b':14 },
-       {'id':15, 'parent_id':None,  'a':'a15', 'b':15 },
-       {'id':16, 'parent_id':None,  'a':'a16', 'b':16 },   
+       {'id':10, 'parent_id':None,  'a':'a10'},
+       {'id':11, 'parent_id':10,    'a':'a11'},
+       {'id':12, 'parent_id':10,    'a':'a12'},        
+       {'id':13, 'parent_id':11,    'a':'a13'},
+       {'id':14, 'parent_id':12,    'a':'a14'},
+       {'id':15, 'parent_id':None,  'a':'a15'},
+       {'id':16, 'parent_id':None,  'a':'a16'},   
        ]
     
     print 'json.dumps(nodes):', json.dumps(nodes)
@@ -57,17 +57,19 @@ if __name__=='__main__':
     #print result.items()
     #print result.values()
     
+    print 'result: ', result
+    
     keys = []
     for k,v in result.iteritems():
-        print k,v
+        print "key,values:", k,v
         keys.append(k)
     #print type(result) # <type 'dict'>
     
-    print keys
-    for key in keys:
-        print key
-        
-                
+    print 'key list: ', keys
+    #for key in keys:
+    #    print key
+                   
+                   
     for d in nodes:
         id = d.get('id')
         #print id, result.get(id)
