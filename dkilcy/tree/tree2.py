@@ -75,7 +75,6 @@ class Tree:
             for element in queue:
                 self.show(element, level)  # recursive call
 
-
     def expand_tree(self, position, mode=_DEPTH):
         # Python generator. Loosly based on an algorithm from 'Essential LISP' by
         # John R. Anderson, Albert T. Corbett, and Brian J. Reiser, page 239-241
@@ -88,7 +87,7 @@ class Tree:
                 queue = expansion + queue[1:]  # depth-first
             elif mode is _WIDTH:
                 queue = queue[1:] + expansion  # width-first
-
+    
     def is_branch(self, position):
         return self[position].fpointer
 
@@ -113,19 +112,9 @@ class Tree:
     def __contains__(self, identifier):
         return [node.identifier for node in self.nodes if node.identifier is identifier]
 
-def recurse(node):
-    #results = [node['id'])
-    results = []
-    results.append(node['id'])
-   
-    #print results
-    if len(node['children']) > 0:
-        for child in node['children']:
-            results.extend(recurse(child))    
-    return results
-
 if __name__ == "__main__":
-
+    import json
+    
     tree1 = Tree()
     tree1.create_node("Root", "root")  # root node
     tree1.create_node({"foo":"a"}, "a", parent = "root")
@@ -146,15 +135,15 @@ if __name__ == "__main__":
     data = [
        #{'id':14, 'parent_id':12,    'a':'a14'},
        #{'id':15, 'parent_id':None,  'a':'a15'},       
-              
-       {'id':20, 'parent_id':None,  'a':'a20'},
-       {'id':21, 'parent_id':20,    'a':'a21'},
-       {'id':22, 'parent_id':20,    'a':'a22'},        
-       {'id':23, 'parent_id':21,    'a':'a23'},
-       {'id':24, 'parent_id':22,    'a':'a24'},
-       {'id':25, 'parent_id':None,  'a':'a25'},
-       {'id':26, 'parent_id':None,  'a':'a26'}, 
-       
+
+       #{'id':20, 'parent_id':None,  'a':'a20'},
+       #{'id':21, 'parent_id':20,    'a':'a21'},
+       #{'id':22, 'parent_id':20,    'a':'a22'},        
+       #{'id':23, 'parent_id':21,    'a':'a23'},
+       #{'id':24, 'parent_id':22,    'a':'a24'},
+       #{'id':25, 'parent_id':None,  'a':'a25'},
+       #{'id':26, 'parent_id':None,  'a':'a26'}, 
+    
        {'id':10, 'parent_id':None,  'a':'a10'},
        {'id':11, 'parent_id':10,    'a':'a11'},
        {'id':12, 'parent_id':10,    'a':'a12'},        
@@ -180,6 +169,22 @@ if __name__ == "__main__":
     tree2.show("root")  
     print("="*80)
     
+    print 'tree2.get_index(0): ', tree2.get_index(str(10))
+    print 'tree2.get_index(1): ', tree2.get_index(str(12))
     
+    for node in tree2.expand_tree(str(10), mode=_DEPTH):
+        print type(tree2[node]), tree2[node].name, tree2[node].identifier
+        
+    print("="*80)
     
+    '''   
+    for node in tree2.expand_tree("root", mode=_DEPTH):
+        print(node)
+    print("="*80)
+    
+    for node in tree2.expand_tree("root", mode=_WIDTH):
+        print(node)
+    print("="*80)
+    '''
+
     

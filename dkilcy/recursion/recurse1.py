@@ -3,7 +3,7 @@ A simple example that just walks the tree
 '''
 
 def recurse(node):
-    #results = [node['id'])
+
     results = []
     results.append(node['id'])
    

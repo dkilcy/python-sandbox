@@ -23,7 +23,7 @@ def do_work(nodes):
             parent_id = node['parent_id']            
             #print id, parent_id                            
             d[parent_id].append(id)            
-            print 'd:', d     
+            #print 'd:', d     
        
     return d
 
