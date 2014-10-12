@@ -141,9 +141,7 @@ class S3Performance(object):
     # ====================================================================== #
         
     def run(self):
-       
-        print 'clean on exit is %s' % self.clean_on_exit
-       
+
         conn = S3Connection(self.access_key, self.secret_key,
             host=self.host)
         
@@ -154,20 +152,18 @@ class S3Performance(object):
         try:
             # try to create bucket if it does not exist
             bucket = conn.create_bucket(self.bucket)
-            print 'created bucket %s' % self.bucket            
+            print 'created bucket: %s' % bucket           
         except S3CreateError:
             # bucket exists, use it
             bucket = conn.get_bucket(self.bucket)
-            print 'got bucket %s' % self.bucket
-        
-        print bucket
-            
+            print 'got bucket: %s' % bucket
+                    
         filename, filesize, md5_checksum = self._create_file()
 
         chunk_count = int(math.ceil(filesize/self.chunk_size))
         
         if chunk_count > 0:
-            print 'will use multpart upload'
+            print 'will use multipart upload'
         else:
             print 'will use regular upload'
             self.chunk_size = filesize
@@ -179,6 +175,7 @@ class S3Performance(object):
         wrapped = None
         
         if self.op == 'GET':
+            print "uploading file '%s' for GET measurement" % (filename)
             self._put_S3(bucket, filename, filesize, md5_checksum, 
                          chunk_count)                                                            
             wrapped = wrapper(self._get_S3, bucket, filename)
@@ -214,6 +211,7 @@ class S3Performance(object):
         for i in range(1, (self.numfiles+1) ):     
             
             if self.op == 'DELETE':
+                print "uploading file '%s' for DELETE measurement" % (filename)
                 self._put_S3(bucket, filename, filesize, md5_checksum, \
                              chunk_count)
 
@@ -257,11 +255,11 @@ class S3Performance(object):
         print "%d %dKB %s's performed (total time=%f ms):" % ( self.numfiles, \
             filesize_kilobytes, self.op, total_time*1000)        
         print " Avg: %0.2f ms;  %0.2f op/s;  %0.2f Mb/s" % \
-            ( avg_time, avg_iops, avg_speed )
+            ( (avg_time * 1000), avg_iops, avg_speed )
         print " Max: %0.2f ms;  %0.2f op/s;  %0.2f Mb/s" % \
-            ( max_time, max_iops, max_speed )
+            ( (max_time * 1000), max_iops, max_speed )
         print " Min: %0.2f ms;  %0.2f op/s;  %0.2f Mb/s" % \
-            ( min_time, min_iops, min_speed )        
+            ( (min_time * 1000), min_iops, min_speed )        
         
         conn.close()
     
@@ -299,7 +297,7 @@ time of each operation, operations per seconds and their speed in Mb/s.")
     
     options, args = parser.parse_args()
     
-    print options, args
+    #print options, args
     
     perf = S3Performance(options)
 
