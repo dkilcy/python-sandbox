@@ -1,5 +1,16 @@
 import sys 
 
+id = '595dc3e8-558a-44f5-be2f-b100bc4c9e30'
+region = 'RegionOne'
+
+provider_key = "%s.%s" % (region, id)
+
+print provider_key
+
+region, id = provider_key.split('.', 1)
+
+print region, id
+
 role = sys.argv[1] 
 
 def comp_split(role):
