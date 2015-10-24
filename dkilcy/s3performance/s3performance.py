@@ -112,6 +112,7 @@ class S3Performance(object):
         key = Key(bucket)
         key.key = filename
         key.get_contents_to_filename(filename) 
+        #print 'metadata: %s' % ( key.metadata )
 
     def _put_S3(self, bucket, filename, filesize, md5_checksum, chunk_count):
         
@@ -120,6 +121,9 @@ class S3Performance(object):
             key.key = filename            
             key.set_contents_from_filename(filename) 
             #, md5=md5_checksum.hexdigest() )  
+
+            #print 'adding metadata'
+            #key.set_remote_metadata( {'x-scal-test':'value1'}, [], True ) 
         else:
             mp = bucket.initiate_multipart_upload(os.path.basename(filename))
             
