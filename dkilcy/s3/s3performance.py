@@ -18,9 +18,6 @@ Tested with:
 Python 2.6.6
 CentOS release 6.5 (Final)
 
-There is no copyright on this code, so if you can make money with it, good
-for you.
-
 @author: dkilcy
 '''
 
@@ -34,7 +31,6 @@ import uuid
 from optparse import OptionParser
 
 from boto.exception import S3CreateError
-#from boto.s3.connection import Location
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 
@@ -284,8 +280,8 @@ time of each operation, operations per seconds and their speed in Mb/s.")
         help="Values are PUT, GET and DELETE")
     parser.add_option("-n", "--numfiles", type="int",
         help="The number of files to perform operations on")
-    parser.add_option("-s", "--size", type="int",
-        help="The size of the files in KB")
+    parser.add_option("-s", "--size", type="int", default=64,
+        help="The size of the files in KB. Default is 64KB")
     parser.add_option("-a", "--access_key", 
         help="Access key")
     parser.add_option("-k", "--secret_key", 
@@ -300,8 +296,6 @@ time of each operation, operations per seconds and their speed in Mb/s.")
         help="Remove generated files on program exit")
     
     options, args = parser.parse_args()
-    
-    #print options, args
     
     perf = S3Performance(options)
 

@@ -1,13 +1,23 @@
+import os
+access_key=os.environ['RS2_ACCESS_KEY']
+secret_key=os.environ['RS2_SECRET_KEY']
 
 from boto.s3.connection import S3Connection
-conn = S3Connection('ts.test1','aa28dde7',host='demo.scality.com')
+conn = S3Connection(access_key,secret_key,host='demo.scality.com')
 
 ###
 
 bucket = conn.create_bucket('tstest1-b1')
 #bucket = conn.get_bucket('tstest1-b1')
+
 print bucket.list()
+for c in bucket.list():
+   print c
+
 print conn.get_all_buckets()
+
+for b in conn.get_all_buckets():
+   print b
 
 #bucket.set_acl('public-read')
 
@@ -17,6 +27,8 @@ from boto.s3.key import Key
 k = Key(bucket)
 k.key = 'test1.dat'
 k.set_contents_from_string('hello123')
+#k.set_acl('public-read')
+
 
 c = Key(bucket)
 c.key = 'test1.dat'
