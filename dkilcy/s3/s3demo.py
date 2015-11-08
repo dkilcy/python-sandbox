@@ -1,9 +1,10 @@
 import os
 access_key=os.environ['RS2_ACCESS_KEY']
 secret_key=os.environ['RS2_SECRET_KEY']
+host='demo.scality.com'
 
 from boto.s3.connection import S3Connection
-conn = S3Connection(access_key,secret_key,host='demo.scality.com')
+conn = S3Connection(access_key,secret_key,host=host)
 
 ###
 
