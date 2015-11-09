@@ -1,13 +1,12 @@
 #
-# GET Object from RS2
+# GET Object ACL from RS2
 #
 bucket=$1
 file=$2
 
-resource="/${bucket}/${file}"
-contentType="application/text"
+resource="/${bucket}/${file}?acl"
 dateValue=`date -uR`
-stringToSign="GET\n\n${contentType}\n${dateValue}\n${resource}"
+stringToSign="GET\n\n\n${dateValue}\n${resource}"
 signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${RS2_SECRET_KEY} -binary | base64`
 
 curl -k -vv -X GET \
@@ -15,5 +14,5 @@ curl -k -vv -X GET \
   -H "Date: ${dateValue}" \
   -H "Content-Type: ${contentType}" \
   -H "Authorization: AWS ${RS2_ACCESS_KEY}:${signature}" \
-  http://${bucket}.${RS2_HOST}/${file}
+  http://${bucket}.${RS2_HOST}/${file}?acl
 

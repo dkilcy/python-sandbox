@@ -23,6 +23,7 @@ pip install boto
 Set the RS2 access key and secret key as an environment variable
 
 ```
+export RS2_HOST=demo.scality.com
 export RS2_ACCESS_KEY=accesskey
 export RS2_SECRET_KEY=secretkey
 ```

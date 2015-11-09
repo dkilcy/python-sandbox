@@ -1,15 +1,15 @@
 import os
 access_key=os.environ['RS2_ACCESS_KEY']
 secret_key=os.environ['RS2_SECRET_KEY']
-host='demo.scality.com'
+host=os.environ['RS2_HOST']
 
 from boto.s3.connection import S3Connection
 conn = S3Connection(access_key,secret_key,host=host)
 
 ###
 
-bucket = conn.create_bucket('tstest1-b1')
-#bucket = conn.get_bucket('tstest1-b1')
+#bucket = conn.create_bucket('test-bucket')
+bucket = conn.get_bucket('test-bucket')
 
 print bucket.list()
 for c in bucket.list():
@@ -29,23 +29,25 @@ k = Key(bucket)
 k.key = 'test1.dat'
 k.set_contents_from_string('hello123')
 #k.set_acl('public-read')
-
+k.set_remote_metadata( {'x-scal-test': { 'key1':'value1' }}, [], True ) 
 
 c = Key(bucket)
 c.key = 'test1.dat'
 print c.get_contents_as_string()
 print c.get_acl()
-###
+print c.metadata
 
 ###
 
-full_bucket = conn.get_bucket('tstest1-b1')
+###
+
+full_bucket = conn.get_bucket('test-bucket')
 # It's full of keys. Delete them all.
 for key in full_bucket.list():
     key.delete()
 
 # The bucket is empty now. Delete it.
-conn.delete_bucket('tstest1-b1')
+conn.delete_bucket('test-bucket')
 
 ###
 

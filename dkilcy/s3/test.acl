@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>54EE2BA8C3072DB154EE2B000000004000000140</ID>
+<DisplayName>scalityrs2</DisplayName>
+</Owner>
+<AccessControlList><Grant><Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser"><ID>54EE2BA8C3072DB154EE2B000000004000000140</ID>
+<DisplayName>scalityrs2</DisplayName>
+</Grantee>
+<Permission>READ</Permission>
+</Grant>
+</AccessControlList>
+</AccessControlPolicy>

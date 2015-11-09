@@ -2,7 +2,6 @@
 # Delete RS2 User
 #
 user=$1
-host=$2
 
 resource="/users/${user}"
 dateValue=`date -uR`
@@ -12,5 +11,5 @@ signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${RS2_ADMIN_SECRET_KEY}
 curl -k -vv \
   -H "Date: ${dateValue}" \
   -H "Authorization: AWS ${RS2_ADMIN_ACCESS_KEY}:${signature}" \
-  http://{$host}${resource}
+  http://{$RS2_HOST}:8180${resource}
 
